@@ -24,6 +24,7 @@ export default class NobbbPluginSearch {
 
   eachArticle(rawDocument, documentInfo, cb) {
     //console.log(rawDocument);
+    return;
     let words = nodejieba.cut(rawDocument);
     
     words.reduce((res, word) => {
@@ -38,7 +39,8 @@ export default class NobbbPluginSearch {
     });
     
     this.documentInfoSet[documentInfo.id] = documentInfo;
-    cb();
+    
+    cb && cb();
   }
 
   after() {

@@ -24,27 +24,30 @@ export default class NobbbPluginSearch {
 
   eachArticle(rawDocument, documentInfo, cb) {
     //console.log(rawDocument);
-    return;
+
     let words = nodejieba.cut(rawDocument);
     
-    words.reduce((res, word) => {
+    words = words.reduce((res, word) => {
       res[word] = res[word] || 0;
       res[word]++;
       return res;
     }, {});
     
     Object.keys(words).forEach(word => {
+      let word = word.toLowerCase();
       this.keymap[word] = this.keymap[word] || [];
       this.keymap[word].push({id: documentInfo.id, count: words[word]});
     });
-    
+
+    // TODO 只生成标题和 url 就好了
     this.documentInfoSet[documentInfo.id] = documentInfo;
     
     cb && cb();
+    
   }
 
   after() {
-    
+    console.log(this.keymap)
   }
   
   

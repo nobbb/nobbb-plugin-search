@@ -47,7 +47,6 @@ export default class NobbbPluginSearch {
   }
 
   after() {
-    console.log(this.keymap)
   }
   
   
